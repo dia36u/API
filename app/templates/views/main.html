@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">URL to scrap:</label>
+            <input type="text" class="form-control" name="URL_scrap" id="URL_scrap">
+            <button type="submit" name="add_scrap" value="add_scrap" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ID to delete:</label>
+            <input type="text" class="form-control" name="id_to_delete" id="id_to_delete">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="delete_all" value="delete_all" class="btn btn-primary">Delete all</button>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ID to show:</label>
+            <input type="text" class="form-control" name="id_to_show" id="id_to_show">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="show_all" value="show_all" class="btn btn-primary">Show all</button>
+        </div>
+    </form>
+    <div class="mb-3">
+        {% if id_scrap %}
+            <ul class="list-group">
+                <li class="list-group-item">ID: {{ id_scrap }}</li>
+                <li class="list-group-item">Content: {{dictionnaire}}</li>
+                <li class="list-group-item">URL: {{url}} </li>
+            </ul>
+        {% endif %}
+
+        {% if id_to_delete %}
+                <ul class="list-group">
+                <li class="list-group-item">ID: {{ id_to_delete }} is deleted!</li>
+                </ul>
+        {% endif %}
+
+        {% if id_to_show %}
+        <ul class="list-group">
+        <li class="list-group-item">ID: {{ id_to_show }}</li>
+        <li class="list-group-item">Content: {{dictionnaire}}</li>
+        <li class="list-group-item">URL: {{url}}</li>
+        </ul>
+        {% endif %}
+
+        {% if scraps %}
+        <ul class="list-group">
+            {% for i in scraps %}
+        <li class="list-group-item">ID: {{ i.id }}</li>
+        <li class="list-group-item">Content: {{ i.text }}</li>
+        <li class="list-group-item">URL: {{ i.url }}</li>
+        {%endfor%}
+        </ul>
+        {% endif %}
+
+        {% if DB_stat %}
+        <ul class="list-group">
+        <li class="list-group-item">{{ DB_stat }}</li>
+        </ul>
+        {% endif %}
+
+    </div>
+{% endblock %}       
